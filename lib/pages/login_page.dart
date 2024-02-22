@@ -61,7 +61,7 @@ class _ContenidoState extends State<Contenido> {
             fontSize: 25,
             ),
           ),
-          SizedBox(height: 5,),
+          SizedBox(height: 15,),
           Text('Bienvenido a tu cuenta',
             style: TextStyle(color:Colors.white,
             fontSize: 15,
@@ -69,6 +69,9 @@ class _ContenidoState extends State<Contenido> {
             ),
           ),
           Datos(),
+          //Remember(),
+          SizedBox(height:5),
+
         ],
       ),
     );
@@ -83,10 +86,16 @@ class Datos extends StatefulWidget {
 }
 
 class _DatosState extends State<Datos> {
+  bool showPass=true;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
+      decoration:BoxDecoration(
+        borderRadius:BorderRadius.circular(10),
+        color:Colors.white,
+        ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -113,18 +122,132 @@ class _DatosState extends State<Datos> {
           ),
           const SizedBox(height: 5),
         TextFormField(
-          obscureText: true,
+          obscureText: showPass,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
             hintText: 'contraseña',
             suffixIcon: IconButton(
               icon: const Icon(Icons.remove_red_eye_outlined),
-              onPressed: ()=>{},
+              onPressed: ()=>{
+                setState((){
+                  showPass==true ? showPass = false : showPass= true;
+                })
+              },
             ),
           ),
-        )
+        ),
+        const Remember(),
+        const SizedBox(height: 30,),
+        const Botones(),
         ],
       ),
     );
   }
 }
+
+class Remember extends StatefulWidget {
+  const Remember({super.key});
+
+  @override
+  State<Remember> createState() => _RememberState();
+}
+
+class _RememberState extends State<Remember> {
+  bool checked =false;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Checkbox(
+          value: checked,
+          onChanged: (value) => {
+            setState(() => 
+              checked==false ? checked=true : checked=false
+            ),
+          },
+        ),
+      const Text('Recordar cuenta', style: TextStyle(fontSize: 12,),),
+    
+      const Spacer(),
+      TextButton(
+        onPressed: ()=>{},
+        child: const Text('olvido su contraseña', style: TextStyle(fontSize: 12,),),
+      ),
+      ],
+    );
+  }
+}
+
+class Botones extends StatefulWidget {
+  const Botones({super.key});
+
+  @override
+  State<Botones> createState() => _BotonesState();
+}
+
+class _BotonesState extends State<Botones> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: ()=>{},
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(const Color(0xff142047)),
+            ),
+            child: const Text('Login',
+             style: TextStyle(color:Colors.white),
+            ),
+          ),
+        ),
+       const SizedBox(
+        height:15,
+       width: double.infinity,
+       ),
+       const Text('O entra con',
+       style: TextStyle(color: Colors.grey,),
+       ),
+      const SizedBox(
+        height: 15,
+        width: double.infinity,
+      ),
+      SizedBox(
+        height: 50,
+        width: double.infinity,        
+        child: OutlinedButton(
+          onPressed: () => {},
+          child: const Text('Google', 
+          style: TextStyle(color:Color(0xff142047),
+          fontWeight: FontWeight.bold,
+          fontSize: 18,)
+          ,)
+          ,),
+      ),
+
+            const SizedBox(
+        height: 15,
+        width: double.infinity,
+      ),
+      SizedBox(
+        height: 50,
+        width: double.infinity,
+        
+        child: OutlinedButton(
+          onPressed: () => {},
+          child: const Text('Facebook', 
+          style: TextStyle(color:Color(0xff142047),
+          fontWeight: FontWeight.bold,
+          fontSize: 18,)
+          ,)
+          ,),
+      ),
+
+      ],
+    );
+  }
+}
+
+//se termina haciendo el privacy Policy
