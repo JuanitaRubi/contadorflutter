@@ -1,3 +1,4 @@
+import 'package:countertest/pages/reset_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -70,7 +71,9 @@ class _ContenidoState extends State<Contenido> {
           ),
           Datos(),
           //Remember(),
-          SizedBox(height:5),
+          SizedBox(height:40),
+          PrivacyPolicy(),
+         
 
         ],
       ),
@@ -154,6 +157,14 @@ class Remember extends StatefulWidget {
 
 class _RememberState extends State<Remember> {
   bool checked =false;
+
+    void handlePasswordForgotten() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const PasswordRecoveryPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -170,7 +181,7 @@ class _RememberState extends State<Remember> {
     
       const Spacer(),
       TextButton(
-        onPressed: ()=>{},
+        onPressed: handlePasswordForgotten,
         child: const Text('olvido su contraseña', style: TextStyle(fontSize: 12,),),
       ),
       ],
@@ -244,10 +255,29 @@ class _BotonesState extends State<Botones> {
           ,)
           ,),
       ),
-
+        
       ],
     );
   }
 }
+
+class PrivacyPolicy extends StatelessWidget {
+  const PrivacyPolicy({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'Política de Privacidad',
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 12,
+        
+       ),
+    );
+  }
+}
+
+
+
 
 //se termina haciendo el privacy Policy
